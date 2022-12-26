@@ -19,14 +19,19 @@ function getMaxDigit(number) {
 // FUNCTION 02
 function powerOfNumbers(number, power) {
     number = +prompt("Введіть число");
-    power = +prompt("Введіть ступінь");
-
+    power = +prompt("Введіть степінь");
+    let result = 1;
     if (typeof number !== "number" || typeof power !== "number" || isNaN(number) === true || isNaN(power) === true){
         alert("Числа не повинні містити інших символів, окрім цифр")
-    } else {
-        let result = 1;
+    } else if (power >= 0 ) {
         for (let i = 0; i < power; i++) {
             result *= number;
+        }
+        console.log(`${number} у ${power} степені = ${result}`);
+        alert(`${number} у ${power} степені = ${result}`);
+    } else {
+        for (let i = power; i < 0; i++) {
+            result /= number
         }
         console.log(`${number} у ${power} степені = ${result}`);
         alert(`${number} у ${power} степені = ${result}`);
