@@ -29,7 +29,7 @@ function getMedian(getRandomArray) {
     sortedArray = randomArray.sort((a, b) => a-b);
     let median = null;
     if (sortedArray.length % 2 !== 0) {
-        median = sortedArray[(sortedArray.length - 1) / 2] / 2;
+        median = sortedArray[(sortedArray.length - 1) / 2];
     } else {
         median = (sortedArray[(sortedArray.length / 2) - 1] + sortedArray[sortedArray.length / 2]) / 2;
     };
@@ -66,6 +66,7 @@ function replaceBadWords(string) {
         if (el === "shit" || el === "fuck") return el = "****"
         else return el
     });
-    alert("Відформатоване речення: ", clearString.join(" "));
-    console.log("Відформатоване речення: ", clearString.join(" "));
+    clearString = clearString.join(" ")
+    alert(`Відформатоване речення: ${clearString}`);
+    console.log(`Відформатоване речення: ${clearString}`);
 }
