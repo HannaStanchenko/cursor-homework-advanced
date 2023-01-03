@@ -14,28 +14,21 @@ function makePairs (array = []) {
 console.log("Розділіть студентів на пари:", makePairs(students));
 
 function pairsPlusThemes (pairs, theme) {
-    const pairsAndThemes = [];
-    const copyPairs = pairs.slice();
-
-    pairsAndThemes.push(
-        [copyPairs[0][0] + " і " + copyPairs[0][1] + ", " + theme[0]],
-        [copyPairs[1][0] + " і " + copyPairs[1][1] + ", " + theme[1]],
-        [copyPairs[2][0] + " і " + copyPairs[2][1] + ", " + theme[2]]
-    );
+    let pairsAndThemes = [];
+    let copyPairs = pairs.slice();
+    let copyThemes = theme.slice();
+    for (let i = 0; i < copyPairs.length; i++) {
+        pairsAndThemes.push([copyPairs[i].join(" i "), copyThemes[i]])
+    }
     return pairsAndThemes
 }
 console.log("Зіставте пари та теми проєктів:", pairsPlusThemes(makePairs(students), themes));
 
 function assignMarks (student, mark) {
     const studentsMarks = [];
-    studentsMarks.push (
-        [student[0], mark[0]],
-        [student[1], mark[1]],
-        [student[2], mark[2]],
-        [student[3], mark[3]],
-        [student[4], mark[4]],
-        [student[5], mark[5]]
-    );
+    for (let i = 0; i < student.length; i++) {
+        studentsMarks.push([students[i], mark[i]])
+    }
     return studentsMarks
 }
 console.log("Зіставте оцінки зі студентом:", assignMarks(students, marks));
