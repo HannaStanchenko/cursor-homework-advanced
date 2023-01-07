@@ -1,9 +1,9 @@
 // Функція, яка повертає масив випадкових цілих чисел
 let randomArray = [];
-function getRandomArray(length, min, max) {
-    length = +prompt("Введіть бажану довжину масиву");
-    min = +prompt("Введіть мінімальне значення");
-    max = +prompt("Введіть максимальне значення");
+function getRandomArray() {
+    const length = +prompt("Введіть бажану довжину масиву");
+    const min = +prompt("Введіть мінімальне значення");
+    const max = +prompt("Введіть максимальне значення");
 
     if (Number.isInteger(length) !== true || Number.isInteger(min) !== true || Number.isInteger(max) !== true) {
         alert("Числа мають бути цілими і містити лише цифри")
@@ -16,7 +16,7 @@ function getRandomArray(length, min, max) {
 }
 
 // Функція, яка рахує середнє арифметичне всіх переданих в неї аргументів
-function getAverage(getRandomArray) {
+function getAverage() {
     let total = 0
     for (let item of randomArray) total += item;
     total /= randomArray.length
@@ -25,8 +25,8 @@ function getAverage(getRandomArray) {
 }
 
 // Функція, яка рахує медіану всіх переданих в неї аргументів
-function getMedian(getRandomArray) {
-    sortedArray = randomArray.sort((a, b) => a-b);
+function getMedian() {
+    const sortedArray = randomArray.sort((a, b) => a-b);
     let median = null;
     if (sortedArray.length % 2 !== 0) {
         median = sortedArray[(sortedArray.length - 1) / 2];
@@ -38,32 +38,42 @@ function getMedian(getRandomArray) {
 }
 
 // Функція, яка фільтрує парні числа
-function filterEvenNumbers(getRandomArray) {
+function filterEvenNumbers() {
     const filteredArray = randomArray.filter((el) => el % 2 !== 0);
     alert(`Видалити із ${randomArray} парні числа. Результат -  ${filteredArray}`);
     console.log(`Видалити із ${randomArray} парні числа. Результат -  ${filteredArray}`);
 }
 
 //Функція, яка рахує кількість чисел більших 0
-function countPositiveNumbers(getRandomArray) {
+function countPositiveNumbers() {
     const positiveNumbers = randomArray.filter((el) => el > 0);
-    console.log(positiveNumbers);
     alert(`Кількість чисел більших 0 у масиві [${randomArray}] дорівнює ${positiveNumbers.length}`);
     console.log(`Кількість чисел більших 0 у масиві [${randomArray}] дорівнює ${positiveNumbers.length}`);
 }
 
 // Функція, яка фільтрує усі елементи в масиві та залишає тільки ті, які діляться націло на 5
-function getDividedByFive(getRandomArray) {
-    numbersDividedByFive = randomArray.filter((el) => el % 5 === 0);
+function getDividedByFive() {
+    const numbersDividedByFive = randomArray.filter((el) => el % 5 === 0);
     alert(`Числа з масиву [${randomArray}], які діляться націло на 5: ${numbersDividedByFive}`);
     console.log(`Числа з масиву [${randomArray}], які діляться націло на 5: ${numbersDividedByFive}`);
 }
 
 // Функція, що замінює погані слова на *
-function replaceBadWords(string) {
-    string = prompt("Введіть речення").toLowerCase().split(" ");
+function replaceBadWords() {
+    let newBadWords = confirm("Список поганих слів: fuck, shit. Чи бажаєте доповнити цей список?");
+    switch (newBadWords) {
+        case true:
+            newBadWords = prompt("Введіть нове погане слово").toLowerCase();
+            break 
+        ;
+        case false:
+            newBadWords = null;
+            break
+        ;
+    }
+    const string = prompt("Введіть речення").toLowerCase().split(" ");
     clearString = string.map(el => {
-        if (el === "shit" || el === "fuck") return el = "****"
+        if (el === "shit" || el === "fuck" || el == newBadWords) return el = "****"
         else return el
     });
     clearString = clearString.join(" ")
