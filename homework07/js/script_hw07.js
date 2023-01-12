@@ -31,47 +31,44 @@ const chooseCountry = () => {
 const selectedCountry = chooseCountry()
 
 function getCountryNameInUkr(arg) {
-    let country = null;
     if (arg === ukraine) {
-        return country = "Україні"
+        return "Україні"
     } else if (arg === latvia) {
-        return country = "Латвії"
+        return "Латвії"
     } else if (arg === litva) {
-        return country = "Литві"
+        return "Литві"
     }
 };
 
+const salary = +prompt("Введіть вашу зарплату (число має бути цілим)");
 
-function getMyTaxes (salary) {
-    salary = +prompt("Введіть вашу зарплату (число має бути цілим)")
+function getMyTaxes (yourSalary) {
+    const taxAmount = yourSalary * this.tax;
     if (Number.isInteger(salary) !== true) {
         alert("Оновіть сторінку і спробуйте ще раз")
     } 
-    return `Сума податків, яку ви заплатите як IT-спеціаліст в ${getCountryNameInUkr(this)}: ${(salary * this.tax).toFixed(2)}`
+    return Number((taxAmount).toFixed(2))
 };
-console.log(getMyTaxes.call(selectedCountry, 25650));
+console.log(`Сума податків, яку ви заплатите як IT-спеціаліст в ${getCountryNameInUkr(selectedCountry)}:`, getMyTaxes.call(selectedCountry, salary));
 
 function getMiddleTaxes () {
-    return `Середня сума податків IT-спеціалістів в ${getCountryNameInUkr(this)}: ${(this.tax * this.middleSalary).toFixed(2)}`
+    return Number((this.tax * this.middleSalary).toFixed(2))
 };
-console.log(getMiddleTaxes.call(selectedCountry));
+console.log(`Середня сума податків IT-спеціалістів в ${getCountryNameInUkr(selectedCountry)}:`, getMiddleTaxes.call(selectedCountry));
 
 function getTotalTaxes () {
-    return `Загальна сума податків, яку платять спеціалісти в ${getCountryNameInUkr(this)}: ${this.tax * this.middleSalary * this.vacancies}`
+    return this.tax * this.middleSalary * this.vacancies
 };
-console.log(getTotalTaxes.call(selectedCountry));
+console.log(`Загальна сума податків, яку платять спеціалісти в ${getCountryNameInUkr(selectedCountry)}:`, getTotalTaxes.call(selectedCountry));
 
 function getMySalary () {
     const mySalary = {};
     const maxSalary = 2000;
     const minSalary = 1500;
     mySalary.salary = Math.floor((maxSalary - minSalary) * Math.random() + minSalary);
-    mySalary.taxes = Number((this.tax * mySalary.salary).toFixed(2));
+    mySalary.taxes = getMyTaxes.call(selectedCountry, mySalary.salary)
     mySalary.profit = Number((mySalary.salary - mySalary.taxes).toFixed(2));
-
-    return `Зарплата - ${mySalary.salary}
-Сума податку, яку треба буде сплатити в ${getCountryNameInUkr(this)} - ${mySalary.taxes}
-Чистий прибуток - ${mySalary.profit}`
+    return mySalary
 };
 setInterval(() => console.log(getMySalary.call(selectedCountry)), 10000 );
 console.log("ЗАЧЕКАЙТЕ, ЩОБ ПОБАЧИТИ РЕЗУЛЬТАТ ОСТАННЬОЇ ФУНКЦІЇ");
