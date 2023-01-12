@@ -4,6 +4,7 @@ class Student {
         this.university = university,
         this.course = course,
         this.marks = [],
+        this.marksCopy = [],
         this.isExpelledOrNot = true
     }
     getInfo() {
@@ -29,10 +30,13 @@ class Student {
     }
     dismiss() {
         this.isExpelledOrNot = false
+        this.marksCopy = this.marks
+        this.marks = null
         return "Студента відраховано"
     }
     recover() {
         this.isExpelledOrNot = true
+        this.marks = this.marksCopy
         return "Студента поновлено"
     }
 }
