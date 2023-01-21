@@ -1,9 +1,13 @@
 const container = document.querySelector(".main .container");
 
+function getRandomColor () {
+    return '#' + (Math.random().toString(16)).substring(2, 8);
+}
+
 function generateBlocks() {
     for (let i = 0; i < 25; i++) {
         const div = document.createElement("div");
-        div.style.backgroundColor = '#' + (Math.random().toString(16)).substring(2, 8);
+        div.style.backgroundColor = getRandomColor()
         container.prepend(div);
     };
     return
@@ -19,7 +23,7 @@ function generateBlocksInterval() {
     const allDiv = document.querySelectorAll(".main .container div");
     setInterval(() => {
         for (let item of allDiv) {
-            item.style.backgroundColor = '#' + (Math.random().toString(16)).substring(2, 8);
+            item.style.backgroundColor = getRandomColor()
         };
     }, 1000)
     return
