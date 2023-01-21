@@ -5,37 +5,39 @@ class Student {
         this.course = course,
         this.marks = [],
         this.marksCopy = [],
-        this.isExpelledOrNot = true
+        this.isExpelled = false
     }
     getInfo() {
         return `Студент(ка) ${this.course}го курсу ${this.university}, ${this.fullName}`
     }
     get studentMarks() {
-        if (!this.isExpelledOrNot) {
+        if (this.isExpelled) {
             return null
         } else {
             return this.marks
         }
     } 
     set studentMarks(value) {
-        if (this.isExpelledOrNot) {
+        if (!this.isExpelled) {
             this.marks.push(value)
-        } else {
-            return null
         }
     }
     getAverageMark() {
-        const averageMark = (this.marks.reduce((acc, el) => acc+el)) / this.marks.length
-        return averageMark
+        if (!this.isExpelled) {
+            const averageMark = (this.marks.reduce((acc, el) => acc+el)) / this.marks.length
+            return averageMark
+        } else {
+            return 0
+        }
     }
     dismiss() {
-        this.isExpelledOrNot = false
+        this.isExpelled = true
         this.marksCopy = this.marks
         this.marks = null
         return "Студента відраховано"
     }
     recover() {
-        this.isExpelledOrNot = true
+        this.isExpelled = false
         this.marks = this.marksCopy
         return "Студента поновлено"
     }
@@ -47,7 +49,7 @@ class BudgetStudent extends Student {
         setInterval(() => this.getScholarship(), 15000)
     }
     getScholarship() {
-        if (this.isExpelledOrNot === true && this.marks.length !== 0 && this.getAverageMark() >= 4.0) {
+        if (this.isExpelled === false && this.marks.length !== 0 && this.getAverageMark() >= 4.0) {
             console.log("Ви отримали 1400 грн. стипендії")
         } 
     }
